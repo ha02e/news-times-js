@@ -10,7 +10,7 @@ const getLatestNews = async () => {
   const response = await fetch(url);
   const data = await response.json(); //json:파일형식
   news = data.articles;
-  //console.log("dddd", news);
+  console.log("dddd", news);
 };
 
 getLatestNews();
