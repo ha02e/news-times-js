@@ -16,4 +16,9 @@ const getLatestNews = async () => {
   console.log("dddd", news);
 };
 
+const render = () => {
+  const newsHTML = ``;
+  document.getElementById("").innerHTML = newsHTML;
+};
+
 getLatestNews();
