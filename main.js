@@ -22,3 +22,11 @@ const render = () => {
 };
 
 getLatestNews();
+
+// 모바일 슬라이드 메뉴
+const openNav = () => {
+  document.getElementById("sideNav").style.width = "70vw";
+};
+const closeNav = () => {
+  document.getElementById("sideNav").style.width = "0";
+};

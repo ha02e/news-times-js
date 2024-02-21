@@ -12,6 +12,7 @@ body {
   align-items: center;
 }
 
+/* 모바일 사이드 메뉴 */
 #menu-icon {
   display: none;
   border: none;
@@ -23,6 +24,37 @@ body {
   background-repeat: no-repeat;
 }
 
+#sideNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #d9dcde;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+#menu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#menu-list button {
+  margin: 5px;
+  padding: 0.5em;
+  border: none;
+  background: none;
+}
+
+#menu-list button:hover {
+  background-color: #2d3034;
+  color: #ffffff;
+}
+
+/* 검색 */
 .search-section {
   display: flex;
   align-items: center;
@@ -60,6 +92,7 @@ body {
   background-repeat: no-repeat;
 }
 
+/* 로고 */
 .head-line {
   display: flex;
   justify-content: center;
@@ -74,6 +107,7 @@ body {
   color: #2d3034;
 }
 
+/* pc버전 메뉴 */
 .menus {
   margin-top: 1em;
   display: flex;
@@ -86,10 +120,16 @@ body {
 .menus button {
   border: none;
   background: none;
-  margin: 5px;
-  padding: 6px 0;
+  padding: 10px;
+  transition: 0.5s;
 }
 
+.menus button:hover {
+  background-color: #2d3034;
+  color: #ffffff;
+}
+
+/* 뉴스 영역 */
 #news-board {
   padding: 1em;
   display: grid;
@@ -133,12 +173,25 @@ body {
 
 /* 모바일 */
 @media screen and (max-width: 600px) {
+  .menus {
+    display: none;
+  }
+
   #menu-icon {
     display: block;
   }
 
-  .menus {
-    display: none;
+  #close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    border: none;
+    width: 28px;
+    height: 28px;
+    background: url(images/close.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   #news-board {
