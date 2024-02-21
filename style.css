@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+}
+
+.head-line {
+  margin-top: 1.4em;
+  display: flex;
+  justify-content: center;
+}
+
+.head-line h1 {
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5.2em;
+  margin: 0;
+}
+
+.menus {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  border-top: 2px solid #d9dcde;
+  border-bottom: 3px double #2d3034;
+}
+
+.menus button {
+  border: none;
+  background: none;
+  margin: 5px;
+  padding: 6px 0;
+}

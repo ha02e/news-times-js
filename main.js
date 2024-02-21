@@ -4,8 +4,11 @@ let news = [];
 //뉴스 불러오는 함수
 const getLatestNews = async () => {
   const url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   );
+  //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=us&apiKey=${API_KEY}
+
   //url 호출
   const response = await fetch(url);
   const data = await response.json(); //json:파일형식
