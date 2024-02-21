@@ -6,9 +6,9 @@ body {
 }
 
 .top-section {
-  margin-top: 1.4em;
+  margin: 1.4em 0.5em 0 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -140,12 +140,19 @@ body {
 }
 
 .news {
+  cursor: pointer;
   border: 1px solid #d9dcde;
 }
 
-.news2 {
-  grid-column: 2/4;
-  grid-row: 1/3;
+.news:hover .news-image > img {
+  transform: scale(1.1);
+  transition: transform 0.5s ease-in-out;
+}
+
+.news-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
 }
 
 .news-image img {
@@ -154,12 +161,13 @@ body {
   object-fit: cover;
 }
 
-.news-image {
-  height: 250px;
+.news2 {
+  grid-column: 2/4;
+  grid-row: 1/3;
 }
 
 .news2 .news-image {
-  height: 500px;
+  height: 520px;
 }
 
 .news-contents {
@@ -168,12 +176,60 @@ body {
 
 .news-title {
   font-weight: bold;
-  font-size: 1.8em;
+  font-size: 1.6em;
   margin-bottom: 0.4em;
+}
+
+/* footer */
+.footer-contents {
+  background-color: #2d3034;
+  padding: 2em;
+  color: #ffffff;
+}
+
+.footer-contents a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-contents h2 {
+  margin-top: 0.6em;
+  font-family: "Berkshire Swash", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3em;
+  text-align: center;
+}
+
+.link_list {
+  width: 15%;
+  margin: 2em auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.link_list li {
+  list-style: none;
+  cursor: pointer;
+}
+
+.footer-contents p {
+  text-align: center;
+  margin-top: 0.6em 0;
+  font-size: 0.9em;
+  font-weight: lighter;
 }
 
 /* 모바일 */
 @media screen and (max-width: 600px) {
+  .top-section {
+    margin: 1.4em 0 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .menus {
     display: none;
   }
@@ -199,5 +255,16 @@ body {
     padding: 1em;
     display: flex;
     flex-direction: column;
+  }
+
+  .link_list {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .link_list li {
+    margin: 0.5em;
   }
 }
