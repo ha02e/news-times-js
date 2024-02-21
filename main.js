@@ -5,10 +5,10 @@ let searchIcon = document.getElementById("search-icon");
 //뉴스 불러오는 함수
 const getLatestNews = async () => {
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}&pageSize=13`
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
-  //https://hy-news-times.netlify.app/top-headlines?country=us&apiKey=${API_KEY}
+  //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}&pageSize=13
 
   //url 호출
   const response = await fetch(url);
@@ -19,19 +19,33 @@ const getLatestNews = async () => {
 };
 
 const render = () => {
+  let noImageUrl = "images/no-image.png";
+
   const newsHTML = newsList
     .map(
       (news) =>
         `<div class="news news${newsList.indexOf(news) + 1}">
       <div class="news-image">
-        <img src="${news.urlToImage}" />
+        <img src="${
+          news.urlToImage == null || news.urlToImage == ""
+            ? noImageUrl
+            : news.urlToImage
+        }" />
       </div>
       <div class="news-contents">
         <h2 class="news-title">${news.title}</h2>
         <p class="news-text">
-          ${news.description}
+          ${
+            news.description == null || news.description == ""
+              ? "(내용 없음)"
+              : news.description
+          }
         </p>
-        <div class="news-date">${news.source.name} * ${news.publishedAt}</div>
+        <div class="news-date">${moment(news.publishedAt).fromNow()}&nbsp; (${
+          news.source.name == null || news.source.name == ""
+            ? "no source"
+            : news.source.name
+        })</div>
       </div>
     </div>`
     )
