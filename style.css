@@ -292,6 +292,10 @@ footer {
     background-repeat: no-repeat;
   }
 
+  .head-line h1 {
+    font-size: 4em;
+  }
+
   #news-board {
     padding: 1em;
     display: flex;
