@@ -26,8 +26,10 @@ const searchNews = async () => {
   const keyword = document.getElementById("search-keyword").value;
   //console.log(keyword);
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
+  //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
 
   const response = await fetch(url);
   const data = await response.json();
@@ -46,24 +48,26 @@ const closeNav = () => {
 //뉴스 불러오는 함수
 const getLatestNews = async () => {
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
-  //https://hy-news-times.netlify.app/top-headlines?country=us&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
 
   //url 호출
   const response = await fetch(url);
   const data = await response.json(); //json:파일형식
   newsList = data.articles;
   render();
-  console.log("dddd", newsList);
+  // console.log("dddd", newsList);
 };
 
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
   );
+  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
 
   const response = await fetch(url);
   const data = await response.json();
