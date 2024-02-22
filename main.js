@@ -2,10 +2,14 @@ const API_KEY = `fee0da4c686f44969b929bbc84192c2a`;
 let newsList = [];
 let searchArea = document.getElementById("search-area");
 let searchIcon = document.getElementById("search-icon");
+let searchBtn = document.getElementById("search-btn");
 const menus = document.querySelectorAll(".menus button");
+
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
+
+searchBtn.addEventListener("click", () => searchNews());
 
 //검색
 const openSearchArea = () => {
@@ -18,9 +22,20 @@ const openSearchArea = () => {
   }
 };
 
-const searchNews = () => {
+const searchNews = async () => {
   searchIcon.style.display = "block";
   searchArea.style.display = "none";
+
+  const keyword = document.getElementById("search-keyword").value;
+  console.log(keyword);
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+  );
+
+  const response = await fetch(url);
+  const data = await response.json();
+  newsList = data.articles;
+  render();
 };
 
 // 모바일 슬라이드 메뉴
