@@ -2,14 +2,11 @@ const API_KEY = `fee0da4c686f44969b929bbc84192c2a`;
 let newsList = [];
 let searchArea = document.getElementById("search-area");
 let searchIcon = document.getElementById("search-icon");
-let searchBtn = document.getElementById("search-btn");
 const menus = document.querySelectorAll(".menus button");
 
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
-
-searchBtn.addEventListener("click", () => searchNews());
 
 //검색
 const openSearchArea = () => {
@@ -27,7 +24,7 @@ const searchNews = async () => {
   searchArea.style.display = "none";
 
   const keyword = document.getElementById("search-keyword").value;
-  console.log(keyword);
+  //console.log(keyword);
   const url = new URL(
     `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
@@ -49,7 +46,7 @@ const closeNav = () => {
 //뉴스 불러오는 함수
 const getLatestNews = async () => {
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}&pageSize=13`
+    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=us&apiKey=${API_KEY}
@@ -64,16 +61,20 @@ const getLatestNews = async () => {
 
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
-  console.log(category);
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
   );
 
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
-  console.log("DDDD", data);
   render();
+};
+
+//이미지 에러 처리
+const imgError = (image) => {
+  image.onerror = null;
+  image.src = "images/no-image.png";
 };
 
 const render = () => {
@@ -88,7 +89,7 @@ const render = () => {
           news.urlToImage == null || news.urlToImage == ""
             ? noImageUrl
             : news.urlToImage
-        }" />
+        }"  alt="뉴스 이미지" onerror="imgError(this)"/>
       </div>
       <div class="news-contents">
         <h2 class="news-title">${news.title}</h2>
@@ -113,7 +114,3 @@ const render = () => {
 };
 
 getLatestNews();
-
-//1.버튼들에 클릭 이벤트 추가
-//2. 카테고리별 뉴스 가져오기
-//3. 그 뉴스를 보여주기
