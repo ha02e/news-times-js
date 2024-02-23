@@ -4,6 +4,12 @@ let searchArea = document.getElementById("search-area");
 let searchIcon = document.getElementById("search-icon");
 const menus = document.querySelectorAll(".menus button");
 
+let url = new URL(
+  `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
+);
+//https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
+//https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
+
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
@@ -24,17 +30,13 @@ const searchNews = async () => {
   searchArea.style.display = "none";
 
   const keyword = document.getElementById("search-keyword").value;
-  //console.log(keyword);
-  const url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
 
-  const response = await fetch(url);
-  const data = await response.json();
-  newsList = data.articles;
-  render();
+  getNews();
 };
 
 // 모바일 슬라이드 메뉴
@@ -45,34 +47,33 @@ const closeNav = () => {
   document.getElementById("sideNav").style.width = "0";
 };
 
-//뉴스 불러오는 함수
-const getLatestNews = async () => {
-  const url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
-  );
-  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
-  //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
-
-  //url 호출
-  const response = await fetch(url);
-  const data = await response.json(); //json:파일형식
-  newsList = data.articles;
-  render();
-  // console.log("dddd", newsList);
-};
-
-const getNewsByCategory = async (event) => {
-  const category = event.target.textContent.toLowerCase();
-  const url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
-  );
-  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
-  //https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
-
+const getNews = async () => {
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
   render();
+};
+
+//뉴스 불러오는 함수
+const getLatestNews = async () => {
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
+  );
+  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
+
+  getNews();
+};
+
+const getNewsByCategory = async (event) => {
+  const category = event.target.textContent.toLowerCase();
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
+  );
+  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
+
+  getNews();
 };
 
 //이미지 에러 처리
