@@ -144,6 +144,12 @@ body {
   grid-gap: 1em;
 }
 
+#news-board .alert {
+  grid-column: 1/5;
+  text-align: center;
+  align-self: start;
+}
+
 .news {
   cursor: pointer;
   border: 1px solid #d9dcde;
