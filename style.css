@@ -65,16 +65,16 @@ body {
 }
 
 .search input {
-  height: 28px;
+  height: 30px;
   margin: 0 0 0 10px;
   padding-left: 10px;
-  border: 1px solid #2d3034;
+  border-bottom: 2px solid #2d3034;
   font-size: 0.9em;
 }
 
 .search button {
   display: block;
-  height: 28px;
+  height: 30px;
   margin: 0;
   padding: 0 10px;
   border: none;
@@ -85,8 +85,8 @@ body {
 
 #search-icon {
   border: none;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background: url(images/search.png);
   background-size: cover;
   background-position: center;
@@ -125,7 +125,7 @@ body {
 .menus button {
   border: none;
   background: none;
-  padding: 10px;
+  padding: 10px 20px;
   transition: 0.5s;
 }
 
@@ -152,7 +152,7 @@ body {
 
 .news {
   cursor: pointer;
-  border: 1px solid #d9dcde;
+  border: 2px solid #ebecee;
   overflow-x: auto;
 }
 
@@ -309,6 +309,24 @@ footer {
     padding: 1em;
     display: flex;
     flex-direction: column;
+  }
+
+  .news2 {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+
+  .news2 .news-image {
+    height: 220px;
+  }
+
+  .news2 .news-title {
+    font-size: 1.2em;
+    -webkit-line-clamp: 3;
+  }
+
+  .news2 .news-text {
+    -webkit-line-clamp: 3;
   }
 
   .link_list {
