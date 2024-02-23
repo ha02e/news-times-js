@@ -6,7 +6,7 @@ let searchKeyword = document.getElementById("search-keyword");
 const menus = document.querySelectorAll(".menus button");
 
 let url = new URL(
-  `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
+  `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
 );
 //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
 //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -39,7 +39,7 @@ const searchNews = async () => {
 
   let keyword = searchKeyword.value;
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
@@ -77,7 +77,7 @@ const getNews = async () => {
 //뉴스 불러오는 함수
 const getLatestNews = async () => {
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -88,7 +88,7 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
