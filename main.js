@@ -11,7 +11,7 @@ const pageSize = 13;
 const groupSize = 5;
 
 let url = new URL(
-  `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+  `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
 );
 //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
 //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -44,7 +44,7 @@ const searchNews = async () => {
 
   let keyword = searchKeyword.value;
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
@@ -63,7 +63,7 @@ const closeNav = () => {
 const getNews = async () => {
   try {
     //url 호출 전에 세팅해준다.
-    url.searchParams.set("page", page); //page라는 파라미터 세팅(&page=page)
+    url.searchParams.set("page", page); //&page=page
     url.searchParams.set("pageSize", pageSize); //&pageSize=pageSize
 
     const response = await fetch(url);
@@ -87,7 +87,7 @@ const getNews = async () => {
 
 const getLatestNews = async () => {
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -98,7 +98,7 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
+    `https://hy-news-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
@@ -160,10 +160,6 @@ const errorRender = (errorMessage) => {
 
 //페이지네이션
 const paginationRender = () => {
-  //totalResult
-  //page
-  //pageSize
-  //totalPage
   const totalPage = Math.ceil(totalResults / pageSize);
   const pageGroup = Math.ceil(page / groupSize);
   let lastPage = pageGroup * groupSize;
@@ -181,24 +177,6 @@ const paginationRender = () => {
     }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
   }
   document.querySelector(".pagination").innerHTML = paginationHTML;
-
-  //   <nav aria-label="Page navigation example">
-  //   <ul class="pagination">
-  //     <li class="page-item">
-  //       <a class="page-link" href="#" aria-label="Previous">
-  //         <span aria-hidden="true">&laquo;</span>
-  //       </a>
-  //     </li>
-  //     <li class="page-item"><a class="page-link" href="#">1</a></li>
-  //     <li class="page-item"><a class="page-link" href="#">2</a></li>
-  //     <li class="page-item"><a class="page-link" href="#">3</a></li>
-  //     <li class="page-item">
-  //       <a class="page-link" href="#" aria-label="Next">
-  //         <span aria-hidden="true">&raquo;</span>
-  //       </a>
-  //     </li>
-  //   </ul>
-  // </nav>
 };
 
 const moveToPage = (pageNum) => {

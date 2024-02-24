@@ -249,13 +249,13 @@ body {
 }
 
 .page-link:focus:hover {
-  background-color: #d9dcde;
+  background-color: #e6e8e8;
   border: 1px solid #2d3034;
 }
 
 .page-link:hover {
   color: #000;
-  background-color: #d9dcde;
+  background-color: #e6e8e8;
   border: 1px solid #2d3034;
 }
 
