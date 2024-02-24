@@ -5,10 +5,15 @@ let searchIcon = document.getElementById("search-icon");
 let searchKeyword = document.getElementById("search-keyword");
 const menus = document.querySelectorAll(".menus button");
 
+let totalResults = 0;
+let page = 1;
+const pageSize = 13;
+const groupSize = 5;
+
 let url = new URL(
-  `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
+  `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
 );
-//https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
+//https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
 //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
 
 menus.forEach((menu) =>
@@ -39,7 +44,7 @@ const searchNews = async () => {
 
   let keyword = searchKeyword.value;
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
@@ -57,6 +62,10 @@ const closeNav = () => {
 
 const getNews = async () => {
   try {
+    //url 호출 전에 세팅해준다.
+    url.searchParams.set("page", page); //page라는 파라미터 세팅(&page=page)
+    url.searchParams.set("pageSize", pageSize); //&pageSize=pageSize
+
     const response = await fetch(url);
     const data = await response.json();
     if (response.status === 200) {
@@ -65,7 +74,9 @@ const getNews = async () => {
         throw new Error("검색 결과가 없습니다.");
       }
       newsList = data.articles;
+      totalResults = data.totalResults;
       render();
+      paginationRender();
     } else {
       throw new Error(data.message);
     }
@@ -74,12 +85,11 @@ const getNews = async () => {
   }
 };
 
-//뉴스 불러오는 함수
 const getLatestNews = async () => {
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   );
-  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&apiKey=${API_KEY}
+  //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
 
   getNews();
@@ -88,10 +98,10 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   );
-  //https://newsapi.org/v2/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
-  //https://hy-news-times.netlify.app/top-headlines?country=kr&pageSize=13&category=${category}&apiKey=${API_KEY}
+  //https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
+  //https://hy-news-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
 
   getNews();
 };
@@ -146,6 +156,56 @@ const errorRender = (errorMessage) => {
 
   document.getElementById("news-board").innerHTML = errorHTML;
   searchKeyword.value = "";
+};
+
+//페이지네이션
+const paginationRender = () => {
+  //totalResult
+  //page
+  //pageSize
+  //totalPage
+  const totalPage = Math.ceil(totalResults / pageSize);
+  const pageGroup = Math.ceil(page / groupSize);
+  let lastPage = pageGroup * groupSize;
+  if (lastPage > totalPage) {
+    lastPage = totalPage;
+  }
+  const firstPage =
+    lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
+
+  let paginationHTML = ``;
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `<li class="page-item ${
+      i == page ? "active" : ""
+    }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+  }
+  document.querySelector(".pagination").innerHTML = paginationHTML;
+
+  //   <nav aria-label="Page navigation example">
+  //   <ul class="pagination">
+  //     <li class="page-item">
+  //       <a class="page-link" href="#" aria-label="Previous">
+  //         <span aria-hidden="true">&laquo;</span>
+  //       </a>
+  //     </li>
+  //     <li class="page-item"><a class="page-link" href="#">1</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">2</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">3</a></li>
+  //     <li class="page-item">
+  //       <a class="page-link" href="#" aria-label="Next">
+  //         <span aria-hidden="true">&raquo;</span>
+  //       </a>
+  //     </li>
+  //   </ul>
+  // </nav>
+};
+
+const moveToPage = (pageNum) => {
+  console.log(pageNum);
+
+  page = pageNum;
+  getNews();
 };
 
 getLatestNews();
