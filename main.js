@@ -163,18 +163,20 @@ const paginationRender = () => {
   let paginationHTML = ``;
   const totalPage = Math.ceil(totalResults / pageSize);
   const pageGroup = Math.ceil(page / groupSize);
+
   let lastPage = pageGroup * groupSize;
   if (lastPage > totalPage) {
     lastPage = totalPage;
   }
+
   const firstPage =
     lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
 
   page === 1
     ? ""
-    : (paginationHTML = `<li class="page-item" onclick="moveToPage(${
+    : (paginationHTML = `<li class="page-item" onclick="moveToPage(${1})"><a class="page-link" href="#">&lt;&lt;</a></li><li class="page-item" onclick="moveToPage(${
         page - 1
-      })"><a class="page-link" href="#">Previous</a></li>`);
+      })"><a class="page-link" href="#">&lt;</a></li>`);
 
   for (let i = firstPage; i <= lastPage; i++) {
     paginationHTML += `<li class="page-item ${
@@ -186,7 +188,7 @@ const paginationRender = () => {
     ? ""
     : (paginationHTML += `<li class="page-item" onclick="moveToPage(${
         page + 1
-      })"><a class="page-link" href="#">Next</a></li>`);
+      })"><a class="page-link" href="#">&gt;</a></li><li class="page-item" onclick="moveToPage(${totalPage})"><a class="page-link" href="#">&gt;&gt;</a></li>`);
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
 
