@@ -11,7 +11,7 @@ const pageSize = 13;
 const groupSize = 5;
 
 let url = new URL(
-  `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
+  `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
 );
 //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
 //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -44,7 +44,7 @@ const searchNews = async () => {
 
   let keyword = searchKeyword.value;
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}
@@ -87,7 +87,7 @@ const getNews = async () => {
 
 const getLatestNews = async () => {
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&apiKey=${API_KEY}
@@ -98,7 +98,7 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   url = new URL(
-    `https://hy-news-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   );
   //https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
   //https://hy-news-times.netlify.app/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}
@@ -160,6 +160,7 @@ const errorRender = (errorMessage) => {
 
 //페이지네이션
 const paginationRender = () => {
+  let paginationHTML = ``;
   const totalPage = Math.ceil(totalResults / pageSize);
   const pageGroup = Math.ceil(page / groupSize);
   let lastPage = pageGroup * groupSize;
@@ -169,19 +170,27 @@ const paginationRender = () => {
   const firstPage =
     lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
 
-  let paginationHTML = ``;
+  page === 1
+    ? ""
+    : (paginationHTML = `<li class="page-item" onclick="moveToPage(${
+        page - 1
+      })"><a class="page-link" href="#">Previous</a></li>`);
 
   for (let i = firstPage; i <= lastPage; i++) {
     paginationHTML += `<li class="page-item ${
       i == page ? "active" : ""
-    }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+    }" onclick="moveToPage(${i})"><a class="page-link" href="#">${i}</a></li>`;
   }
+
+  page === lastPage
+    ? ""
+    : (paginationHTML += `<li class="page-item" onclick="moveToPage(${
+        page + 1
+      })"><a class="page-link" href="#">Next</a></li>`);
   document.querySelector(".pagination").innerHTML = paginationHTML;
 };
 
 const moveToPage = (pageNum) => {
-  console.log(pageNum);
-
   page = pageNum;
   getNews();
 };
