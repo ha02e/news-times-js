@@ -96,6 +96,11 @@ const getLatestNews = async () => {
 };
 
 const getNewsByCategory = async (event) => {
+  menus.forEach((item) => {
+    item.className = "";
+  });
+  event.target.className = "selected";
+
   const category = event.target.textContent.toLowerCase();
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`

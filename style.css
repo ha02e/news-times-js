@@ -54,6 +54,11 @@ body {
   color: #ffffff;
 }
 
+.menus button.selected {
+  background-color: #2d3034;
+  color: #ffffff;
+}
+
 /* 검색 */
 .search-section {
   display: flex;
