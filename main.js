@@ -123,7 +123,9 @@ const render = () => {
   const newsHTML = newsList
     .map(
       (news) =>
-        `<div class="news news${newsList.indexOf(news) + 1}">
+        `<div class="news news${
+          newsList.indexOf(news) + 1
+        }" onclick="location.href='${news.url}'">
       <div class="news-image">
         <img src="${
           news.urlToImage == null || news.urlToImage == ""
