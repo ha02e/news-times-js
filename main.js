@@ -71,7 +71,7 @@ const getNews = async () => {
     if (response.status === 200) {
       if (data.articles.length === 0) {
         //검색어 관련 기사가 없을 경우
-        throw new Error("검색 결과가 없습니다.");
+        throw new Error("조회된 결과가 없습니다.");
       }
       newsList = data.articles;
       totalResults = data.totalResults;
